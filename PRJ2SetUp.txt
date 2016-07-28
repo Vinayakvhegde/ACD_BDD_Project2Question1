@@ -1,0 +1,19 @@
+#create a Spool Directory and Update .conf file :-
+#Spooldir in my case is /home/hadoop/Desktop/flume_sink
+agent1.sources.source1_1.spoolDir = /home/hadoop/Desktop/flume_sink
+
+#Sink is /flume_sink under hdfs
+agent1.sinks.hdfs-sink1_1.hdfs.path = hdfs://localhost.localdomain:9000/flume_sink
+
+Step 2: execute the command to transfer data into HDFS
+flume-ng agent -n agent1 -f /usr/local/flume/conf/AcadgildLocal.conf
+
+The file is Stored over HDFS as
+/flume_sink/FlumeData.1469545565013
+
+
+Last Step :
+sqoop export --connect jdbc:mysql://localhost/project2 --username 'root' -P --table AnswerQ1 --export-dir 'prj2/AnswerQ1/part-m-00000' --input-fields-terminated-by ',' -m1
+
+
+sqoop export --connect jdbc:mysql://localhost/project2 --username 'root' -P --table AnswerQ1 --export-dir 'prj2/AnswerQ2/part-m-00000' --input-fields-terminated-by '\t' -m1
